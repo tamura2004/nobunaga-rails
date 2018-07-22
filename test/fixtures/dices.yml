@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  color: MyString
+  number: 1
+  owner: one
+
+two:
+  color: MyString
+  number: 1
+  owner: two

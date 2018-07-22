@@ -1,0 +1,28 @@
+.container
+
+  .card-deck
+    - @boards.each do |board|
+      - if board.number == 1 || board.number == 2
+        - board.samurais.each do |samurai|
+          .card.box-shadow.text-center
+            h5.card-header = samurai.name
+            .card-body
+            .card-footer = samurai.ability
+      - else
+        - board.castles.each do |castle|
+          .card.box-shadow.text-center
+            h5.card-header = castle.country
+            .card-body
+              p.text-left = castle.area
+              h5 = castle.name
+            .card-footer = castle.ability
+
+  .card-deck.mt-4
+    - @boards.each do |board|
+      .card.text-center
+        .card-header
+          h5 = board.number
+        .card-body
+          button.btn.btn-primary 選択
+
+
