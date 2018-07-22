@@ -5,24 +5,27 @@
       - if board.number == 1 || board.number == 2
         - board.samurais.each do |samurai|
           .card.box-shadow.text-center
-            h5.card-header = samurai.name
+            h5.card-header.py-0 = samurai.name
             .card-body
-            .card-footer = samurai.ability
+            .card-footer.py-0 = samurai.ability
       - else
         - board.castles.each do |castle|
           .card.box-shadow.text-center
-            h5.card-header = castle.country
-            .card-body
-              p.text-left = castle.area
+            h5.card-header.py-0 = castle.country
+            .card-body.py-1.px-2
+              h6.text-left = castle.area
               h5 = castle.name
-            .card-footer = castle.ability
+            .card-footer.py-0 = castle.ability
 
   .card-deck.mt-4
     - @boards.each do |board|
-      .card.text-center
-        .card-header
-          h5 = board.number
-        .card-body
-          button.btn.btn-primary 選択
+      .card
+        .card-header.py-0.text-center
+          h6.mb-0 = board.number
+        .card-body.p-1
+          button.btn.btn-primary.btn-sm.m-1.p-0.dice 1
+          button.btn.btn-danger.btn-sm.m-1.p-0.dice 1
+          button.btn.btn-success.btn-sm.m-1.p-0.dice 1
+          button.btn.btn-warning.btn-sm.m-1.p-0.dice 1
 
 
