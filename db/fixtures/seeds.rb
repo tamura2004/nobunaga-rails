@@ -20,6 +20,8 @@ end
 	end
 end
 
+Dice.delete_all
+
 10.times do |n|
 	6.times do |color|
 		Dice.seed do |s|
@@ -28,12 +30,12 @@ end
 			if rand() < 0.3
 				s.owner_type = "Game"
 				s.owner_id = 1
-			elsif rand() < 0.5 
+			elsif rand() < 0.5
 				s.owner_type = "Board"
 				s.owner_id = rand(6)
 			else
 				s.owner_type = "Player"
-				s.owner_id = rand(6)
+				s.owner_id = color
 			end
 		end
 	end

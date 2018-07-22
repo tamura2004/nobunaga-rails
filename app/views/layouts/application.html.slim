@@ -17,6 +17,9 @@ html lang="en"
       ul.navbar-nav
         li.nav-item.active.ml-4 = "第#{@game.turn}ターン"
         li.nav-item.active.ml-4 = "#{@game.step}フェイズ"
+        - unless @player.nil?
+          li.nav-item.active.ml-4 = "手番:#{color_kanji(@player.color)}プレイヤー"
+
 
     = yield
 

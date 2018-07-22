@@ -19,4 +19,11 @@ class Player < ApplicationRecord
     end
   end
 
+  def self.prepare
+    Dice.reset
+    main.each do |p|
+      p.get_dice
+    end
+  end
+
 end
