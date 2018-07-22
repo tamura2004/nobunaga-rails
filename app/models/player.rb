@@ -4,7 +4,13 @@ class Player < ApplicationRecord
 	has_many :dices, as: :owner
 
   scope :main, -> { order(:number).limit(Game.main.players_number) }
-  scope :has_dice, -> { main.where(id: Dice.select(:owner_id).where(owner_type: "Player").group(:owner_id).having("count(owner_id) >= ?",0)) }
+  scope :has_dice, -> { main.where(id: Dice.hand.select(:owner_id).group(:owner_id).having("count(owner_id) >= ?",0)) }
+
+  scope :after, ->(pl) { has_dice.where("number > ?", pl.number) }
+  scope :before, ->(pl) { has_dice.where("number <= ?", pl.number) }
+  scope :remain, ->(pl) { after(pl) + before(pl) }
+  scope :next, ->(pl) { remain(pl).first }
+
   scope :current, -> { find_by(number: Game.main.current_player) }
 
   def dice_amount
@@ -14,16 +20,12 @@ class Player < ApplicationRecord
   end
 
   def get_dice
-    Dice.where(color: color).where(owner_type: "Game").limit(dice_amount).each do |dice|
-      self.dices << dice
-    end
+    Dice.pool(self).limit(dice_amount).get(self)
   end
 
   def self.prepare
     Dice.reset
-    main.each do |p|
-      p.get_dice
-    end
+    main.each(&:get_dice)
   end
 
 end

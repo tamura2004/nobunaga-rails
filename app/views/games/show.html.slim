@@ -23,7 +23,7 @@
         .card-header.py-0.text-center
           h6.mb-0 = board.number
         .card-body.p-1
-          - board.dices.each do |dice|
+          - board.dices.timed.each do |dice|
             button.btn.btn-sm.m-1.p-0.dice class="btn-#{color(dice.color)}" = dice.number
 
 hr
@@ -32,7 +32,7 @@ hr
   .row
     - @player.samurais.each do |samurai|
       .col-2
-        .card.box-shadow.text-center
+        .card.box-shadow.text-center class="border-#{color(@player.color)}"
           h6.card-header.py-1 = samurai.name
           .card-body
           .card-footer.py-0 = samurai.ability
@@ -54,6 +54,6 @@ hr
           h6 ダイス
         .card-body.p-1
           - @player.dices.each do |dice|
-            = link_to dice.number, move_player_dice_path(@player,dice), {}, class: "btn btn-sm m-1 p-0 dice btn-#{color(dice.color)}"
+            = link_to dice.number, move_player_dice_path(@player,dice), class: "btn btn-sm m-1 p-0 dice btn-#{color(dice.color)}"
 
 

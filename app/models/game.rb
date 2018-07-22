@@ -5,12 +5,8 @@ class Game < ApplicationRecord
 
   scope :main, -> { find(1) }
 
-  def reset(players_number)
-    self.players_number = players_number
-    self.turn = 1
-    self.step = "準備"
-    self.current_player = 1
-    save!
+  def reset(n)
+    update(players_number:n, turn: 1, step: "準備", current_player: 1)
   end
 
 end

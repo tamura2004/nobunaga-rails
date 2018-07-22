@@ -1,9 +1,7 @@
 class GamesController < ApplicationController
 
   def prepare
-    @game = Game.main
-    @boards = Board.all
-    @player = Player.current
+    Player.prepare
 
     @boards.each do |board|
       case board.id
@@ -17,7 +15,9 @@ class GamesController < ApplicationController
         end
       end
     end
-    render :show
+
+    @game.update(step: "行軍")
+    redirect_to march_player_url(Player.current)
   end
 
   # GET /games/march/players/:player_id
@@ -42,7 +42,6 @@ class GamesController < ApplicationController
   def create
     # ゲームの初期化
     num = game_params[:players_number].to_i
-    @game = Game.main
     @game.reset(num)
 
     # デッキの初期化

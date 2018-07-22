@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "game#new"
+  root "games#new"
 
   resource :game do
     member do
@@ -9,6 +9,9 @@ Rails.application.routes.draw do
   end
 
   resources :players do
+    member do
+      get :march
+    end
     resources :dices do
       member do
         get :move
