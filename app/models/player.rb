@@ -5,6 +5,7 @@ class Player < ApplicationRecord
 
   scope :main, -> { order(:number).limit(Game.main.players_number) }
   scope :has_dice, -> { main.where(id: Dice.select(:owner_id).where(owner_type: "Player").group(:owner_id).having("count(owner_id) >= ?",0)) }
+  scope :current, -> { find_by(number: Game.main.current_player) }
 
   def dice_amount
     x = samurais.size

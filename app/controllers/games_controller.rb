@@ -3,6 +3,7 @@ class GamesController < ApplicationController
   def prepare
     @game = Game.main
     @boards = Board.all
+    @player = Player.current
 
     @boards.each do |board|
       case board.id

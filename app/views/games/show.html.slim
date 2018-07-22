@@ -5,16 +5,16 @@
       - if board.number == 1 || board.number == 2
         - board.samurais.each do |samurai|
           .card.box-shadow.text-center
-            h5.card-header.py-0 = samurai.name
+            h6.card-header.py-1 = samurai.name
             .card-body
             .card-footer.py-0 = samurai.ability
       - else
         - board.castles.each do |castle|
           .card.box-shadow.text-center
-            h5.card-header.py-0 = castle.country
+            h6.card-header.py-1 = castle.country
             .card-body.py-1.px-2
               h6.text-left = castle.area
-              h5 = castle.name
+              h6 = castle.name
             .card-footer.py-0 = castle.ability
 
   .card-deck.mt-4
@@ -23,9 +23,10 @@
         .card-header.py-0.text-center
           h6.mb-0 = board.number
         .card-body.p-1
-          button.btn.btn-primary.btn-sm.m-1.p-0.dice 1
-          button.btn.btn-danger.btn-sm.m-1.p-0.dice 1
-          button.btn.btn-success.btn-sm.m-1.p-0.dice 1
-          button.btn.btn-warning.btn-sm.m-1.p-0.dice 1
+          - board.dices.each do |dice|
+            button.btn.btn-sm.m-1.p-0.dice class="btn-#{color(dice.color)}" = dice.number
+hr
+    .navbar.navbar-expand-lg.navbar-light.bg-light.mb-4
+      a.navbar-brand href="#" = "#{color_kanji(@player.color)}プレイヤー"
 
 

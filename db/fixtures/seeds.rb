@@ -23,10 +23,18 @@ end
 10.times do |n|
 	6.times do |color|
 		Dice.seed do |s|
-			s.number = 1
+			s.number = rand(6)+1
 			s.color = COLORS[color]
-			s.owner_type = "Game"
-			s.owner_id = 1
+			if rand() < 0.3
+				s.owner_type = "Game"
+				s.owner_id = 1
+			elsif rand() < 0.5 
+				s.owner_type = "Board"
+				s.owner_id = rand(6)
+			else
+				s.owner_type = "Player"
+				s.owner_id = rand(6)
+			end
 		end
 	end
 end
@@ -59,8 +67,13 @@ samurais.each_with_index do |value,i|
 		s.id = i
 		s.name = name
 		s.ability = ability
-		s.owner_type = "Game"
-		s.owner_id = 1
+		if rand() < 0.5
+			s.owner_type = "Game"
+			s.owner_id = 1
+		else
+			s.owner_type = "Player"
+			s.owner_id = rand(6)
+		end
 	end
 end
 
@@ -99,5 +112,12 @@ castles.each_with_index do |value,i|
 		s.country = country
 		s.name = name
 		s.ability = ability
+		if rand() < 0.5
+			s.owner_type = "Game"
+			s.owner_id = 1
+		else
+			s.owner_type = "Player"
+			s.owner_id = rand(6)
+		end
 	end
 end
