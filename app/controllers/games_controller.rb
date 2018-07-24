@@ -21,13 +21,13 @@ class GamesController < ApplicationController
   end
 
   # GET /games/march/players/:player_id
-  def march
-    player_id = params["player_id"]
-    Dice.where(owner_type: "Player", owner_id: player_id).each do |dice|
-      dice.number = rand(6) + 1
-      dice.save!
-    end      
-  end
+  # def march
+  #   player_id = params["player_id"]
+  #   Dice.where(owner_type: "Player", owner_id: player_id).each do |dice|
+  #     dice.number = rand(6) + 1
+  #     dice.save!
+  #   end      
+  # end
 
   def show
   end

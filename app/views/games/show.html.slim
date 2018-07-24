@@ -3,19 +3,9 @@
   .card-deck
     - @boards.each do |board|
       - if board.number == 1 || board.number == 2
-        - board.samurais.each do |samurai|
-          .card.box-shadow.text-center
-            h6.card-header.py-1 = samurai.name
-            .card-body
-            .card-footer.py-0 = samurai.ability
+        = render partial: "games/samurai", collection: board.samurais
       - else
-        - board.castles.each do |castle|
-          .card.box-shadow.text-center
-            h6.card-header.py-1 = castle.country
-            .card-body.py-1.px-2
-              h6.text-left = castle.area
-              h6 = castle.name
-            .card-footer.py-0 = castle.ability
+        = render partial: "games/castle", collection: board.castles
 
   .card-deck.mt-4
     - @boards.each do |board|
@@ -30,22 +20,12 @@ hr
 
 .container
   .row
-    - @player.samurais.each do |samurai|
-      .col-2
-        .card.box-shadow.text-center class="border-#{color(@player.color)}"
-          h6.card-header.py-1 = samurai.name
-          .card-body
-          .card-footer.py-0 = samurai.ability
+    .col-2
+      = render partial: "games/samurai", collection: @player.samurais
 
   .row.mt-4
-    - @player.castles.each do |castle|
-      .col-2
-        .card.box-shadow.text-center
-          h6.card-header.py-1 = castle.country
-          .card-body.py-1.px-2
-            h6.text-left = castle.area
-            h6 = castle.name
-          .card-footer.py-0 = castle.ability
+    .col-2
+      = render partial: "games/castle", collection: @player.castles
 
   .row.mt-4
     .col-12

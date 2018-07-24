@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resource :game do
     member do
       get :prepare
-      get :march
+      # get :march
     end
   end
 
