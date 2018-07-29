@@ -3,15 +3,13 @@ class Player < ApplicationRecord
 	has_many :castles, as: :owner
 	has_many :dices, as: :owner
 
-  scope :main, -> { order(:number).limit(Game.main.players_number) }
+  scope :main, -> { order(:id).limit(Game.main.players_number) }
   scope :has_dice, -> { main.where(id: Dice.hand.select(:owner_id).group(:owner_id).having("count(owner_id) >= ?",0)) }
 
-  scope :after, ->(pl) { has_dice.where("number > ?", pl.number) }
-  scope :before, ->(pl) { has_dice.where("number <= ?", pl.number) }
+  scope :after, ->(pl) { has_dice.where("id > ?", pl.id) }
+  scope :before, ->(pl) { has_dice.where("id <= ?", pl.id) }
   scope :remain, ->(pl) { after(pl) + before(pl) }
   scope :next, ->(pl) { remain(pl).first }
-
-  scope :current, -> { find_by(number: Game.main.current_player) }
 
   def dice_amount
     x = samurais.size

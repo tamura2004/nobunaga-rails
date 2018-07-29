@@ -4,7 +4,7 @@ class CreateGames < ActiveRecord::Migration[5.2]
       t.integer :players_number
       t.integer :turn
       t.string :step
-      t.integer :current_player
+      t.references :player
 
       t.timestamps
     end

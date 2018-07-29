@@ -1,6 +1,10 @@
 .card.box-shadow.text-center
-  h6.card-header.py-1 = castle.country
+  h6.card-header.py-1.bg-primary.text-white = castle.country
   .card-body.py-1.px-2
-    h6.text-left = castle.area
-    h6 = castle.name
-  .card-footer.py-0 = castle.ability
+    h6.text-left.mb-0 = castle.area.name
+    = image_tag castle.image, class: "card-img"
+    h6.p-0.mb-0 = castle.name
+  .card-footer.px-0.py-1
+    p.m-0
+      - castle.ability.split(/,/).each do |n|
+        = image_tag "dice#{n}", size: "22x22", class: "mx-1"

@@ -1,39 +1,52 @@
-.container
+.gameBoard
+  .players.border-right
+    h1 players
+  .ranks
+    - @ranks.each do |rank|
+      .card
+        .card-header.p-1.text-center.bg-success.text-white
+          - case rank.id
+          - when 0..5
+            h6.mb-0 = @areas[rank.id].name
+          - else
+            h6.mb-0 最大武将数
+        .card-body.p-1
+          h6 = rank.name
 
-  .card-deck
+  .maps
+    - @areas.each do |area|
+      .card
+        .card-header.bg-dark.text-white.text-center.py-1
+          h6.mb-0 = area.name
+
+  .cards
     - @boards.each do |board|
-      - if board.number == 1 || board.number == 2
+      - case board.id
+      - when 0,1
         = render partial: "games/samurai", collection: board.samurais
       - else
         = render partial: "games/castle", collection: board.castles
+  .bonus: h1 bonus
+  .message: h1 message
 
-  .card-deck.mt-4
+  .actions
     - @boards.each do |board|
       .card
-        .card-header.py-0.text-center
-          h6.mb-0 = board.number
+        .card-header.py-1.text-center.bg-success.text-white
+          h6.mb-0 = board.id + 1
         .card-body.p-1
+          h6 = board.name
           - board.dices.timed.each do |dice|
             button.btn.btn-sm.m-1.p-0.dice class="btn-#{color(dice.color)}" = dice.number
 
-hr
-
-.container
-  .row
-    .col-2
-      = render partial: "games/samurai", collection: @player.samurais
-
-  .row.mt-4
-    .col-2
-      = render partial: "games/castle", collection: @player.castles
-
-  .row.mt-4
-    .col-12
-      .card
-        .card-header.py-0
-          h6 ダイス
-        .card-body.p-1
-          - @player.dices.each do |dice|
-            = link_to dice.number, move_player_dice_path(@player,dice), class: "btn btn-sm m-1 p-0 dice btn-#{color(dice.color)}"
+  .activePlayer
+    = render partial: "games/samurai", collection: @player.samurais
+    = render partial: "games/castle", collection: @player.castles
+    .card
+      .card-header.py-0
+        h6 ダイス
+      .card-body.p-1
+        - @player.dices.order(:updated_at).each do |dice|
+          = link_to dice.number, move_player_dice_path(@player,dice), class: "btn btn-sm m-1 p-0 dice btn-#{color(dice.color)}"
 
 

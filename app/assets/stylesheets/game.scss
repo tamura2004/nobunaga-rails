@@ -1,0 +1,52 @@
+@mixin sevenColumn {
+    display: grid;
+    grid-gap: 20px 20px;
+    grid-template-columns: repeat(7, 1fr)
+}
+
+.gameBoard {
+  margin: 20px;
+  display: grid;
+  grid-gap: 20px 20px;
+  grid-template-rows: 70px 70px 180px 140px 140px;
+  grid-template-columns: 1fr 1fr 7fr 1fr;
+  grid-template-areas:
+    "players activePlayer ranks    bonus"  
+    "players activePlayer maps     bonus"  
+    "players activePlayer cards    bonus"  
+    "players activePlayer actions  bonus"  
+    "players activePlayer message  message";
+
+  .players {
+    grid-area: players;
+  }
+
+  .activePlayer {
+    grid-area: activePlayer;
+  }
+
+  .ranks {
+    @include sevenColumn;
+    grid-area: ranks;
+  }
+
+  .maps {
+    @include sevenColumn;
+    grid-area: maps;
+  }
+
+  .actions {
+    @include sevenColumn;
+    grid-area: actions;
+  }
+
+  .cards {
+    @include sevenColumn;
+    grid-area: cards;
+  }
+
+  .message {
+    grid-area: message;
+  }
+
+}

@@ -3,14 +3,15 @@ class DicesController < ApplicationController
   before_action :set_dice
 
   def move
-    @board = Board.find_by(number: @dice.number)
+    @board = Board.find(@dice.number - 1)
     @player.dices.same(@dice).move(@board)
 
     unless Player.remain(@player).empty?
-      @game.update(current_player: Player.next(@player).number)
+      @game.player = Player.next(@player)
+      @game.save
     end
 
-    redirect_to march_player_url(Player.current)
+    redirect_to march_player_url(@game.player)
     # render "games/show"
   end
 

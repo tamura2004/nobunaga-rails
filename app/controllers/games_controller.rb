@@ -17,17 +17,8 @@ class GamesController < ApplicationController
     end
 
     @game.update(step: "行軍")
-    redirect_to march_player_url(Player.current)
+    redirect_to march_player_url(Game.main.player)
   end
-
-  # GET /games/march/players/:player_id
-  # def march
-  #   player_id = params["player_id"]
-  #   Dice.where(owner_type: "Player", owner_id: player_id).each do |dice|
-  #     dice.number = rand(6) + 1
-  #     dice.save!
-  #   end      
-  # end
 
   def show
   end

@@ -2,18 +2,18 @@ module DeckModule
   extend ActiveSupport::Concern
 
   included do
-    scope :deck, -> { where(owner_type: "Game").order(:number) }
+    scope :deck, -> { where(owner_type: "Game").order(:order) }
   end
 
   module ClassMethods
     def reset
-      update_all(owner_type: "Game", owner_id: 1)
+      update_all(owner_type: "Game", owner_id: 0)
       shuffle
     end
 
     def shuffle
       deck.shuffle.each_with_index do |card, i|
-        card.number = i
+        card.order = i
         card.save!
       end
     end

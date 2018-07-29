@@ -1,5 +1,30 @@
 .card.box-shadow.text-center
-  h6.card-header.py-1 = samurai.name
-  .card-body
-  .card-footer.py-0 = samurai.ability
+  h6.card-header.py-1.px-0.bg-secondary.text-white = samurai.name
+  .card-body.p-0
+    = image_tag "samurai#{samurai.id}", class: "card-img"
+  .card-footer.px-0.py-1
+    - case samurai.ability 
+    - when "ダイス交換1"
+      - samurai.value.split(/,/).each_with_index do |n,i|
+        = image_tag "dice#{n}", size: "22x22"
+        - if i == 0
+          span = "/"
+        - if i == 1
+          span = "→" 
+    - when "ダイス交換2"
+      - samurai.value.split(/,/).each_with_index do |n,i|
+        = image_tag "dice#{n}", size: "22x22"
+        - if i == 0
+          span = "→" 
+        - if i == 1
+          span = "/"
+    - when "ダイス削除"
+      - samurai.value.split(/,/).each_with_index do |n,i|
+        = image_tag "dice#{n}", size: "22x22"
+        - if i == 0
+          span = "/"
+        - if i == 1
+          span.mt-1 = "→X" 
+    - else
+      h6.m-0 = samurai.ability
             
