@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resource :game do
     member do
       get :prepare
-      # get :march
+      get :employ
     end
   end
 
@@ -18,5 +18,6 @@ Rails.application.routes.draw do
       end
     end
   end
+  get "players/:player_id/dices/:from/:to/change", to: "dices#change", as: "change_player_dice"
 
 end

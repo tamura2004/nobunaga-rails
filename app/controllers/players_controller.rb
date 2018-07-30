@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   def march
     @player.dices.roll
-    render "games/show"
+    redirect_to game_path
   end
 end

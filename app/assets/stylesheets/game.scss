@@ -8,20 +8,21 @@
   margin: 20px;
   display: grid;
   grid-gap: 20px 20px;
-  grid-template-rows: 70px 70px 180px 140px 140px;
-  grid-template-columns: 1fr 1fr 7fr 1fr;
+  grid-template-rows: 70px 70px 180px 180px 180px;
+  grid-template-columns: 2fr 7fr 1fr;
   grid-template-areas:
-    "players activePlayer ranks    bonus"  
-    "players activePlayer maps     bonus"  
-    "players activePlayer cards    bonus"  
-    "players activePlayer actions  bonus"  
-    "players activePlayer message  message";
+    "players ranks         bonus"  
+    "players maps          bonus"  
+    "players cards         bonus"  
+    "players actions       bonus"  
+    "players activePlayer bonus";
 
   .players {
     grid-area: players;
   }
 
   .activePlayer {
+    @include sevenColumn;
     grid-area: activePlayer;
   }
 

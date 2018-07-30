@@ -5,15 +5,19 @@
   .card-footer.px-0.py-1
     - case samurai.ability 
     - when "ダイス交換1"
-      - samurai.value.split(/,/).each_with_index do |n,i|
-        = image_tag "dice#{n}", size: "22x22"
+      - dices = samurai.value.split(/,/)
+      - dices.each_with_index do |n,i|
+        = link_to change_player_dice_path(@player,n,dices[2])
+          = image_tag "dice#{n}", size: "22x22"
         - if i == 0
           span = "/"
         - if i == 1
           span = "→" 
     - when "ダイス交換2"
+      - dices = samurai.value.split(/,/)
       - samurai.value.split(/,/).each_with_index do |n,i|
-        = image_tag "dice#{n}", size: "22x22"
+        = link_to change_player_dice_path(@player,dices[0],n)
+          = image_tag "dice#{n}", size: "22x22"
         - if i == 0
           span = "→" 
         - if i == 1

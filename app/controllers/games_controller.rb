@@ -20,6 +20,20 @@ class GamesController < ApplicationController
     redirect_to march_player_url(Game.main.player)
   end
 
+  def employ
+    @boards.each do |board|
+      next if board.samurais.empty?
+      # total = { "red" => 2, "blue" => 2 }
+      total = board.dices.order(:id).pluck(:color).group_by(&:itself).transform_values(&:size)
+      maxnum = total.values.max
+      winner = total.select{|k,v| v == maxnum}.keys.last
+      next if winner.nil?
+      player = Player.find_by(color: winner)
+      player.samurais << board.samurais.first
+    end
+    redirect_to prepare_game_path
+  end
+
   def show
   end
 
